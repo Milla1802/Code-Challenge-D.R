@@ -39,10 +39,9 @@ const Calculator = () => {
             </button>
             <button type="button" onClick={() => AreaCalculator(wall1)}>
                 Calcule
-                {console.log(porta)}
             </button>
-            <label>Existe porta nessa parede?</label>
-            <input type="checkbox" name="porta" id="" value={porta} onClick= {() => setPorta(!porta)} />
+            {/* <label>Existe porta nessa parede?</label>
+            <input type="checkbox" name="porta" id="" value={porta} onClick= {() => setPorta(!porta)} /> */}
         </div>
     );
 };
