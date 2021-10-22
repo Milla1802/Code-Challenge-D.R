@@ -7,6 +7,9 @@ function CalcProvider({children}) {
     const [area2, setArea2] = useState(0);
     const [area3, setArea3] = useState(0);
     const [area4, setArea4] = useState(0);
+
+    const [areaDoors, setAreaDoors] = useState(0);
+
     const [wallsTotalArea, setWallsTotalArea] = useState(0);
 
     // Função para somar todas as áreas das paredes
@@ -21,6 +24,7 @@ function CalcProvider({children}) {
         area3, setArea3,
         area4, setArea4,
         wallsTotalArea, WallsTotal,
+        areaDoors, setAreaDoors,
     };
 
     return(
