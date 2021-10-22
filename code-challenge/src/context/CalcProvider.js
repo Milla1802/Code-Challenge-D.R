@@ -11,22 +11,30 @@ function CalcProvider({children}) {
     const [areaDoors, setAreaDoors] = useState(0);
     const [areaWindows, setAreaWindows] = useState(0);
 
-    const [wallsTotalArea, setWallsTotalArea] = useState(0);
+    const [wallsArea, setWallsArea] = useState(0);
+    const [litrosRoom, setLitrosRoom] = useState(0);
 
     // Função para somar todas as áreas das paredes
-    const WallsTotal = (val1, val2, val3, val4) => {
+   /*  const WallsTotal = (val1, val2, val3, val4) => {
         const total = val1 + val2 + val3 + val4;
-        return setWallsTotalArea(total);
-    };
+        return setWallsArea(total);
+    }; */
+
+    // Função da área total do cômodo dividido por 5m², quantidade que 1l de tinta faz
+    const TotalRoom = (walls, doors, windows) => {
+        const result = (walls - (doors + windows)) / 5
+        return setLitrosRoom(result);
+    }; 
 
     const contextValues = {
         area1, setArea1,
         area2, setArea2,
         area3, setArea3,
         area4, setArea4,
-        wallsTotalArea, WallsTotal,
+        wallsArea, /* WallsTotal */
         areaDoors, setAreaDoors,
         areaWindows, setAreaWindows,
+        litrosRoom, TotalRoom,setWallsArea
     };
 
     return(
