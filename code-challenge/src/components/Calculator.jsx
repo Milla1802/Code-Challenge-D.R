@@ -24,31 +24,43 @@ const Calculator = () => {
 
     useEffect(() => {
         calcLitros()
-        console.log(litrosRoom);
+        console.log();
     })
 
+    // Arredondar para duas casas decimais
+    const LitrosRoom = Math.round(litrosRoom * 100)/ 100;
 
 
 
-   const renderSwitch = (litrosRoom) => {
-       switch (litrosRoom) {
-           case  (litrosRoom <= 0.5):
-               return 'Um lata de 0,5l de tinta';  
-            case (litrosRoom <= 2.5):
-                return 'Um lata de 2,5l de tinta';
-            case (litrosRoom <= 3.6):
-                return 'Um lata de 3,6l de tinta';         
-           default: 
-                return 'Uma lata de 18l de tinta';
-       }
+   const renderCases = (litros) => {
+        if(litros <= 0.5) {
+           return 'Uma lata de 0,5l é suficiente';
+        }
+       if(litros > 0.5 && litros < 2.5) {
+           const latas = litros / 0.5;
+           return `Será necessário ${Math.ceil(latas)} latas de 0,5L para toda a área`;
+        }
+       if(litros >= 2.5 && litros < 3.6) {
+            const latas = litros / 2.5;
+            return `Será necessário ${Math.ceil(latas)} latas de 2,5L para toda a área`;
+        }
+        if (litros >= 3.6 && litros < 18) {
+            const latas = litros / 3.6;
+            return `Será necessário ${Math.ceil(latas)} latas de 3,6L para toda a área`;
+        }
+        else {
+            const latas = litros / 18
+            return `Será necessário ${Math.ceil(latas)} latas de 18L para toda a área`;
+        }
+
    }
 
     return (
         <main>
             <div>
-                Seu cômodo têm {wallsArea} m² e precisa de {litrosRoom} L de tinta.
+                Seu cômodo têm {wallsArea}m² e precisa de {LitrosRoom}L de tinta.
             </div>
-            <div><p>{renderSwitch(litrosRoom)}</p></div>
+            <div><p>{renderCases(LitrosRoom)}</p></div>
                 
         </main>
     );

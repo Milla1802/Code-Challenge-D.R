@@ -3,8 +3,9 @@ import CalcContext from "../context/CalcContext";
 
 const Wall1 = () => {
 
-    // Estado local só para pegar as duas medidas
+    // Estado local 
     const [wall1, setWall1] = useState([]);
+    //const [err, setErr] = useState(false);
 
     // Salvo no state global a áreal total da parede
     const { area1, setArea1, } = useContext(CalcContext)
@@ -12,6 +13,9 @@ const Wall1 = () => {
     // Salva as medidas no array
     const handleChange = (e) => {
         const {value} = e.target;
+        if(value < 1 || value > 15) {
+
+        }
         if(value !== ""){
         wall1.push(parseFloat(value));
         return setWall1(wall1);
