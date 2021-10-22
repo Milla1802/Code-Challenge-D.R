@@ -9,6 +9,7 @@ function CalcProvider({children}) {
     const [area4, setArea4] = useState(0);
 
     const [areaDoors, setAreaDoors] = useState(0);
+    const [areaWindows, setAreaWindows] = useState(0);
 
     const [wallsTotalArea, setWallsTotalArea] = useState(0);
 
@@ -25,6 +26,7 @@ function CalcProvider({children}) {
         area4, setArea4,
         wallsTotalArea, WallsTotal,
         areaDoors, setAreaDoors,
+        areaWindows, setAreaWindows,
     };
 
     return(
