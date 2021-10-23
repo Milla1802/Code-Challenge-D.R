@@ -1,22 +1,27 @@
 import React, { useState, useContext} from "react";
+// import Select from 'react-select';
 import CalcContext from "../context/CalcContext";
 
 const Portas = () => {
 
     // Área padrão de cada porta
     const doorSize = 1.52;
+    
+    const {areaDoors, setAreaDoors, altura1} = useContext(CalcContext);
 
     const [numDoors, setNumDoors] = useState(0);
+    const [heigthWall, setheigthWall] = useState(false);
 
-    const {areaDoors, setAreaDoors} = useContext(CalcContext);
 
     const handleChange = (e) => {
         const { value } = e.target;
         const result = value * doorSize;
+        if(altura1 < 2.20){
+            return setheigthWall(true);
+        }
+        setheigthWall(false)
         return setNumDoors(result);
     };
-
-
 
     return (
         <main>
@@ -26,6 +31,9 @@ const Portas = () => {
                 Adicionar
                 { areaDoors } {/* Temporário */}
             </button>
+            { (heigthWall) ?
+            <p>A altura das paredes deve ser no min 30cm mais alta que as portas</p>
+            : console.log(heigthWall) }
         </main>
     );
 };

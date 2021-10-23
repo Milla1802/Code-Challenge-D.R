@@ -19,19 +19,18 @@ const Calculator = () => {
 
     const calcLitros = () => {
         WallsTotal();
-       return TotalRoom(wallsArea,areaDoors, areaWindows)
+        return TotalRoom(wallsArea,areaDoors, areaWindows)
     }
 
     useEffect(() => {
         calcLitros()
-        console.log();
     })
 
     // Arredondar para duas casas decimais
     const LitrosRoom = Math.round(litrosRoom * 100)/ 100;
 
 
-
+    //Fução de cases pode ser colocada em um Middleware*************
    const renderCases = (litros) => {
         if(litros <= 0.5) {
            return 'Uma lata de 0,5l é suficiente';

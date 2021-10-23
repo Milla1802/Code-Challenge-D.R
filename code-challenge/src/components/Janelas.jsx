@@ -19,6 +19,7 @@ const Janelas = () => {
         <main>
             <label htmlFor="">Quantas janelas existe nesse cômodo?</label>
             <input type="number" name="portas" id="" onChange={ (e) => handleChange(e) } />
+            
             <button type="button" onClick={ () =>  setAreaWindows(numWindowns)} >
                 Adicionar
                 { areaWindows } {/* Temporário */}
