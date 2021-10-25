@@ -1,39 +1,50 @@
 import React, {useState, useContext} from "react";
 import CalcContext from "../context/CalcContext";
+import calcAreaWall from "../helpers/calcAreaWall";
 
 const Wall4 = () => {
 
     // Estado local só para pegar as duas medidas
     const [wall4, setWall4] = useState([]);
+    const [err, setErr] = useState(false);
+    const [err2, setErr2] = useState(false);
 
     // Salvo no state global a áreal total da parede
-    const { area4, setArea4, } = useContext(CalcContext)
+    const { setArea4 } = useContext(CalcContext)
 
-    // Salva as medidas no array
-    const handleChange = (e) => {
-        const {value} = e.target;
-        if(value !== ""){
-        wall4.push(parseFloat(value));
-        return setWall4(wall4);
+    // Valida as medidas e salva a area da parede
+    const onChangeWalls = (e) => {
+        const { name, value } = e.target;
+        const numValue = Number(value);
+        if(name === "largura") {
+            if(value >= 1 && value <= 15) {
+                setErr(false)
+                return setWall4({ ...wall4, [name]:numValue})
+            }
+            return setErr(true);
+
         }
-        return;
-    }
+        if(name === "altura") {
+            if(value >= 2.20 && value <= 15) {
+                setErr2(false)
+                return setWall4({ ...wall4, [name]:numValue})
+            }
+            return setErr2(true);
 
-    // Calcular area da parede
-    const AreaCalculator = (wall) => {
-        const result = wall.reduce((acc,curr) => acc * curr)
-        return setArea4(result);
+        }
+
     };
 
     return (
         <div>
-            <label htmlFor=""> largura da quarta parede</label>
-            <input type="number" onChange={event => handleChange(event)} />
-            <label htmlFor=""> altura da quarta parede</label>
-            <input type="number" onChange={event => handleChange(event)} />
-            <button type="button" onClick={() => AreaCalculator(wall4)}>
-                Calcule,
-                {area4} {/* Temporário */}
+            <label htmlFor="largura"> largura da segunda parede</label>
+            <input type="number" id="largura" name="largura" onChange={onChangeWalls} />
+            <label htmlFor="altura"> altura da segunda parede</label>
+            <input type="number" id="altura" name="altura" onChange={onChangeWalls} />
+            {(err) ? <p>Nenhuma parede pode ser menor que 1 metro nem maior que 15m</p> : ''}
+            {(err2) ? <p>As paredes devem ter altura mínima de 2,20 e máxima de 15m </p> : ''}
+            <button type="button" onClick={() => calcAreaWall(wall4, setArea4)}>
+                Adicionar
             </button>
         </div>
     );

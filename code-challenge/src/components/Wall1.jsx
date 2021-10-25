@@ -1,66 +1,55 @@
 import React, {useState, useContext} from "react";
 import CalcContext from "../context/CalcContext";
+import calcAreaWall from "../helpers/calcAreaWall";
 
 const Wall1 = () => {
 
-    // Estado local 
-    const [wall1, setWall1] = useState([]);
-    const [err, setErr] = useState(false);
-    const [err2, setMessage] = useState(false);
-    const [button, setButton] = useState(true);
+    const inicialValue = {
+        altura: 0,
+        largura: 0,
+    }
 
+    // Estado local 
+    const [wall1, setWall1] = useState(inicialValue);
+    const [err, setErr] = useState(false);
+    const [err2, setErr2] = useState(false);
 
     // Salvo no state global a áreal total da parede
-    const { area1, setArea1 } = useContext(CalcContext)
+    const { setArea1 } = useContext(CalcContext);
 
-    // Salva as medidas no array
-    const handleChange = (e) => {
-        const {value} = e.target;
-        if(value >= 1 && value < 15 && value !== "") {
-            wall1.push(parseFloat(value));
-            return setWall1(wall1);
-        } 
-        if(value === "" ) {
-            console.log('vazio');
-            return setErr(false);
+    // Valida as medidas e salva a area da parede
+    const onChangeWalls = (e) => {
+        const { name, value } = e.target;
+        const numValue = Number(value);
+        if(name === "largura") {
+            if(value >= 1 && value <= 15) {
+                setErr(false)
+                return setWall1({ ...wall1, [name]:numValue})
+            }
+            return setErr(true);
+
         }
-        console.log('Caiu aqui');
-        return setErr(!err);
+        if(name === "altura") {
+            if(value >= 2.20 && value <= 15) {
+                setErr2(false)
+                return setWall1({ ...wall1, [name]:numValue})
+            }
+            return setErr2(true);
+
+        }
+
     }
-
-    const handleHeigth = (e) => {
-        const {value} = e.target;
-        if(value >= 2.20 && value < 15 && value !== "") {
-            wall1.push(parseFloat(value));
-            setButton(false);
-            return setWall1(wall1);
-        }
-        if(value === "" ) {
-            console.log('vazio');
-            return setMessage(false);
-        }
-        console.log('Caiu aqui');
-        return setMessage(!err2);
-    }
-
-    // Calcular area da parede
-    const AreaCalculator = (wall) => {
-        const total = wall.reduce((acc,curr) => acc * curr)
-        const result = Math.round(total * 100)/ 100;
-        return setArea1(result);
-    };
 
     return (
         <div>
-            <label htmlFor=""> largura da primeira parede</label>
-            <input type="number" onChange={event => handleChange(event)} />
-            <label htmlFor=""> altura da primeira parede</label>
-            <input type="number" onChange={event => handleHeigth(event)} />
-            {(err) ? <p>Nenhuma parede pode ter menos de 1 metro nem mais de 15 metros</p> : ''}
-            {(err2) ? <p>As paredes devem ter altura mínima de 2,20 </p> : ''}
-            <button type="button" disabled={button} onClick={() => AreaCalculator(wall1)}>
-                Adicionar 
-                {area1} {/* Temporário */}
+            <label htmlFor="largura"> largura da segunda parede</label>
+            <input type="number" id="largura" name="largura" onChange={onChangeWalls} />
+            <label htmlFor="altura"> altura da segunda parede</label>
+            <input type="number" id="altura" name="altura" onChange={onChangeWalls} />
+            {(err) ? <p>Nenhuma parede pode ser menor que 1 metro nem maior que 15m</p> : ''}
+            {(err2) ? <p>As paredes devem ter altura mínima de 2,20 e máxima de 15m </p> : ''}
+            <button type="button" onClick={() => calcAreaWall(wall1, setArea1)}>
+                Adicionar
             </button>
         </div>
     );

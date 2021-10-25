@@ -1,5 +1,6 @@
 import React, {useContext, useEffect} from "react";
 import CalcContext from "../context/CalcContext";
+import renderCases from "../helpers/renderCases";
 
 const Calculator = () => {
 
@@ -31,7 +32,7 @@ const Calculator = () => {
 
 
     //Fução de cases pode ser colocada em um Middleware*************
-   const renderCases = (litros) => {
+   /* const renderCases = (litros) => {
         if(litros <= 0.5) {
            return 'Uma lata de 0,5l é suficiente';
         }
@@ -52,7 +53,7 @@ const Calculator = () => {
             return `Será necessário ${Math.ceil(latas)} latas de 18L para toda a área`;
         }
 
-   }
+   } */
 
     return (
         <main>
