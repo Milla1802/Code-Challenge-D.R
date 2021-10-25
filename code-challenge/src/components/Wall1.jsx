@@ -6,23 +6,19 @@ const Wall1 = () => {
     // Estado local 
     const [wall1, setWall1] = useState([]);
     const [err, setErr] = useState(false);
-    //const [message, setMessage] = useState('');
+    const [err2, setMessage] = useState(false);
+    const [button, setButton] = useState(true);
 
 
     // Salvo no state global a áreal total da parede
-    const { area1, setArea1, setAltura1 } = useContext(CalcContext)
+    const { area1, setArea1 } = useContext(CalcContext)
 
     // Salva as medidas no array
     const handleChange = (e) => {
-        const {value, name} = e.target;
+        const {value} = e.target;
         if(value >= 1 && value < 15 && value !== "") {
-            if(name === 'altura') {
-                setAltura1(parseFloat(value));
-                wall1.push(parseFloat(value));
-                return setWall1(wall1);
-            }
-                wall1.push(parseFloat(value));
-                return setWall1(wall1);
+            wall1.push(parseFloat(value));
+            return setWall1(wall1);
         } 
         if(value === "" ) {
             console.log('vazio');
@@ -30,6 +26,21 @@ const Wall1 = () => {
         }
         console.log('Caiu aqui');
         return setErr(!err);
+    }
+
+    const handleHeigth = (e) => {
+        const {value} = e.target;
+        if(value >= 2.20 && value < 15 && value !== "") {
+            wall1.push(parseFloat(value));
+            setButton(false);
+            return setWall1(wall1);
+        }
+        if(value === "" ) {
+            console.log('vazio');
+            return setMessage(false);
+        }
+        console.log('Caiu aqui');
+        return setMessage(!err2);
     }
 
     // Calcular area da parede
@@ -44,10 +55,11 @@ const Wall1 = () => {
             <label htmlFor=""> largura da primeira parede</label>
             <input type="number" onChange={event => handleChange(event)} />
             <label htmlFor=""> altura da primeira parede</label>
-            <input type="number" name="altura" onChange={event => handleChange(event)} />
+            <input type="number" onChange={event => handleHeigth(event)} />
             {(err) ? <p>Nenhuma parede pode ter menos de 1 metro nem mais de 15 metros</p> : ''}
-            <button type="button" onClick={() => AreaCalculator(wall1)}>
-                Calcule,
+            {(err2) ? <p>As paredes devem ter altura mínima de 2,20 </p> : ''}
+            <button type="button" disabled={button} onClick={() => AreaCalculator(wall1)}>
+                Adicionar 
                 {area1} {/* Temporário */}
             </button>
         </div>
