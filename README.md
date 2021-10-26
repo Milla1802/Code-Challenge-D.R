@@ -37,7 +37,7 @@ Uma aplicação web que ajude o usuário a calcular a quantidade de tinta necess
 Essa aplicação deve considerar que a sala é composta de 4 paredes e deve permitir que o usuário escolha qual a medida de cada parede e quantas janelas e portas possuem cada parede.
 Com base na quantidade necessária o sistema deve apontar tamanhos de lata de tinta que o usuário deve comprar.
 
-# Regras de Negócio
+## Regras de Negócio
 
 1. Nenhuma parede pode ter menos de 1 metro nem mais de 15 metros, mas podem possuir alturas e larguras diferentes
 2. O total de área das portas e janelas deve ser no máximo 50% da área de parede
