@@ -1,5 +1,4 @@
 import React, { useState, useContext} from "react";
-// import Select from 'react-select';
 import CalcContext from "../context/CalcContext";
 
 const Portas = () => {
@@ -15,17 +14,19 @@ const Portas = () => {
     const handleChange = (e) => {
         const { value } = e.target;
         const result = value * doorSize;
-        return setNumDoors(result);
+        return setNumDoors(Math.round(result * 100)/ 100);
     };
 
     return (
         <main>
+             <div className="walls_card">
             <label htmlFor="">Quantas postas existe nesse cômodo?</label>
             <input type="text" name="portas" id="" onChange= { (e) => handleChange(e) } />
-            <button type="submit" onClick={ () =>  setAreaDoors(numDoors) } >
+            <button className="button-wall" type="submit" onClick={ () =>  setAreaDoors(numDoors) } >
                 Adicionar
                 { areaDoors } {/* Temporário */}
             </button>
+            </div>
         </main>
     );
 };

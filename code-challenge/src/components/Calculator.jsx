@@ -10,19 +10,19 @@ const Calculator = () => {
         litrosRoom, TotalRoom,setWallsArea
     } = useContext(CalcContext);
 
-    // Função para chamar a função que soma todas as areas da parede WallsTotal
-    // Função que retorna o TotalRoom com quantos litros de tinta precisa 
-
+    // Função que soma todas as areas das paredes 
     const WallsTotal = () => {
         const total =  area1 + area2 + area3 + area4;
         return setWallsArea(total);
     };
-
+    
+    // Função que retorna o TotalRoom com quantos litros de tinta precisa 
     const calcLitros = () => {
         WallsTotal();
         return TotalRoom(wallsArea,areaDoors, areaWindows)
     }
 
+    // Calcula a quantidade de litros sempre que componete é renderizado
     useEffect(() => {
         calcLitros()
     })

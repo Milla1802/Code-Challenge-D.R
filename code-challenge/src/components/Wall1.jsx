@@ -41,16 +41,19 @@ const Wall1 = () => {
     }
 
     return (
-        <div>
-            <label htmlFor="largura"> largura da segunda parede</label>
+        <div className="container">
+            <div className="walls_card">
+            <label htmlFor="largura"> Primeira Largura</label>
             <input type="number" id="largura" name="largura" onChange={onChangeWalls} />
-            <label htmlFor="altura"> altura da segunda parede</label>
+            <label htmlFor="altura">Primeira Altura</label>
             <input type="number" id="altura" name="altura" onChange={onChangeWalls} />
+        
             {(err) ? <p>Nenhuma parede pode ser menor que 1 metro nem maior que 15m</p> : ''}
             {(err2) ? <p>As paredes devem ter altura mínima de 2,20 e máxima de 15m </p> : ''}
-            <button type="button" onClick={() => calcAreaWall(wall1, setArea1)}>
+            <button className="button-wall" type="button" onClick={() => calcAreaWall(wall1, setArea1)}>
                 Adicionar
             </button>
+            </div>
         </div>
     );
 };
