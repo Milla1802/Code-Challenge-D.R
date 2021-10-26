@@ -24,8 +24,8 @@ const Portas = () => {
             <input type="text" name="portas" id="" onChange= { (e) => handleChange(e) } />
             <button className="button-wall" type="submit" onClick={ () =>  setAreaDoors(numDoors) } >
                 Adicionar
-                { areaDoors } {/* Temporário */}
             </button>
+            <p id="areas">{`Área total: ${areaDoors}`}</p>
             </div>
         </main>
     );

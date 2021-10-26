@@ -23,8 +23,8 @@ const Janelas = () => {
             
             <button className="button-wall" type="button" onClick={ () =>  setAreaWindows(numWindowns)} >
                 Adicionar
-                { areaWindows } {/* Temporário */}
             </button>
+            <p id="areas">{`Área total: ${areaWindows}`}</p>
             </div>
         </main>
     );

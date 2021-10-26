@@ -13,9 +13,10 @@ const Wall1 = () => {
     const [wall1, setWall1] = useState(inicialValue);
     const [err, setErr] = useState(false);
     const [err2, setErr2] = useState(false);
+    const [disabled, setDisabled] = useState(true);
 
     // Salvo no state global a áreal total da parede
-    const { setArea1 } = useContext(CalcContext);
+    const { area1, setArea1 } = useContext(CalcContext);
 
     // Valida as medidas e salva a area da parede
     const onChangeWalls = (e) => {
@@ -23,7 +24,7 @@ const Wall1 = () => {
         const numValue = Number(value);
         if(name === "largura") {
             if(value >= 1 && value <= 15) {
-                setErr(false)
+                setErr(false);
                 return setWall1({ ...wall1, [name]:numValue})
             }
             return setErr(true);
@@ -31,9 +32,11 @@ const Wall1 = () => {
         }
         if(name === "altura") {
             if(value >= 2.20 && value <= 15) {
-                setErr2(false)
+                setErr2(false);
+                setDisabled(false);
                 return setWall1({ ...wall1, [name]:numValue})
             }
+            setDisabled(true);
             return setErr2(true);
 
         }
@@ -50,9 +53,10 @@ const Wall1 = () => {
         
             {(err) ? <p>Nenhuma parede pode ser menor que 1 metro nem maior que 15m</p> : ''}
             {(err2) ? <p>As paredes devem ter altura mínima de 2,20 e máxima de 15m </p> : ''}
-            <button className="button-wall" type="button" onClick={() => calcAreaWall(wall1, setArea1)}>
+            <button className="button-wall" type="button" disabled={disabled} onClick={() => calcAreaWall(wall1, setArea1)}>
                 Adicionar
             </button>
+            <p id="areas">{`Área total: ${area1}`}</p>
             </div>
         </div>
     );
