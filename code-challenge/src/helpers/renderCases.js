@@ -1,3 +1,4 @@
+// Calculo de quantidade de tinta
 const renderCases = (litros) => {
     if(litros <= 0.5) {
        return 'Uma lata de 0,5l é suficiente';

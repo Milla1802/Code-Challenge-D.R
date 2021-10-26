@@ -12,18 +12,20 @@ const Janelas = () => {
     const handleChange = (e) => {
         const { value } = e.target;
         const result = value * windowSize;
-        return setNumWindowns(result);
+        return setNumWindowns(Math.round(result * 100)/ 100);
     };
 
     return (
         <main>
+            <div className="walls_card">
             <label htmlFor="">Quantas janelas existe nesse cômodo?</label>
             <input type="number" name="portas" id="" onChange={ (e) => handleChange(e) } />
             
-            <button type="button" onClick={ () =>  setAreaWindows(numWindowns)} >
+            <button className="button-wall" type="button" onClick={ () =>  setAreaWindows(numWindowns)} >
                 Adicionar
-                { areaWindows } {/* Temporário */}
             </button>
+            <p id="areas">{`Área total: ${areaWindows}`}</p>
+            </div>
         </main>
     );
 };
